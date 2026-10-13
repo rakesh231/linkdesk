@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LinkDesk · Small links, clear insights</title><link rel="stylesheet" href="/desk.css"><script src="/desk.js" defer></script></head>
+<body>
+<header class="topbar"><a class="brand" href="/"><span class="brandmark">↗</span> LinkDesk</a><div class="right"><span class="local">LOCAL WORKSPACE</span><span id="health" class="health">Checking service…</span></div></header>
+<main>
+<section class="intro"><p class="eyebrow">YOUR LINKS, IN ONE PLACE</p><h1>Small links.<br><span>Clear insights.</span></h1><p>Give a long URL a simpler home. Create a link,<br class="desktop"> see where it goes, and keep track of every visit.</p></section>
+<section class="create card" aria-labelledby="create-title"><div class="section-heading"><h2 id="create-title">Create a short link</h2><span class="pill">01 / CREATE</span></div>
+<form id="create-form"><label for="url">Destination URL</label><input id="url" type="url" placeholder="https://example.com/your-next-big-idea" required maxlength="2048" autocomplete="url">
+<div class="form-grid"><div><label for="alias">Custom name <span class="muted">optional</span></label><input id="alias" placeholder="launch-notes" maxlength="32" autocomplete="off"><small>4–32 characters. Letters, numbers, - or _.</small></div><div><label for="expiry">Link lifetime</label><select id="expiry"><option value="">No expiration</option><option value="60">1 hour</option><option value="1440">1 day</option><option value="10080">7 days</option><option value="43200">30 days</option></select><small>You can disable a link at any time.</small></div></div>
+<button id="create-button" class="primary" type="submit">Create link <span aria-hidden="true">↗</span></button></form>
+<p id="create-notice" class="notice" role="status" aria-live="polite"></p><div id="created" class="created" hidden><span>READY TO SHARE</span><div><a id="created-url" target="_blank" rel="noopener noreferrer"></a><button id="copy-created" type="button">Copy link</button></div></div></section>
+<section class="library card" aria-labelledby="library-title"><div class="section-heading"><div><p class="eyebrow">02 / MANAGE</p><h2 id="library-title">Your link library</h2></div><button id="refresh" type="button">↻ Refresh</button></div>
+<div class="metrics"><div><strong id="metric-links">0</strong><span>Links on this page</span></div><div><strong id="metric-active">0</strong><span>Active on this page</span></div><div><strong id="metric-visits">0</strong><span>Visits on this page</span></div></div>
+<p id="library-notice" class="notice" role="status"></p><div class="table-wrap"><table><thead><tr><th>LINK / DESTINATION</th><th>STATUS</th><th>VISITS</th><th>MANAGE</th></tr></thead><tbody id="links"></tbody></table></div>
+<div id="empty" class="empty" hidden><span aria-hidden="true">↗</span><h3>Your first link starts here</h3><p>Paste a destination above. Your saved links and visit counts will appear here.</p></div>
+<div class="pagination"><span id="page-label">Page 1</span><div><button id="previous" disabled>Previous</button><button id="next" disabled>Next</button></div></div></section>
+<section id="details" class="card details" hidden aria-labelledby="details-title"><div class="section-heading"><h2 id="details-title">Link insights</h2><button id="close-details">Close</button></div><p id="detail-destination" class="destination"></p><div id="detail-meta" class="detail-meta"></div><h3>Daily visits <span class="muted">last 30 days · UTC</span></h3><div id="daily-bars" class="bars" aria-label="Daily visit counts"></div><p class="fineprint">Visits count successful GET requests, including repeat visits. HEAD checks are excluded.</p></section>
+<footer><span>LinkDesk · A simpler way to share</span><span>Stored locally. No tracking cookies.</span></footer>
+</main></body></html>

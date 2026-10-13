@@ -68,4 +68,30 @@ public class LinkRepository {
     long value = rs.getLong(column);
     return rs.wasNull() ? null : Instant.ofEpochMilli(value);
   }
+
+  public void recordDay(String code, java.time.LocalDate day) {
+    // Caller holds the link row lock, so the first daily insert cannot race another visit.
+    int updated =
+        jdbc.update(
+            "UPDATE daily_visits SET visits = visits + 1 WHERE code = ? AND visit_day = ?",
+            code,
+            day);
+    if (updated == 0)
+      jdbc.update("INSERT INTO daily_visits(code, visit_day, visits) VALUES(?, ?, 1)", code, day);
+  }
+
+  public java.util.Map<java.time.LocalDate, Long> days(
+      String code, java.time.LocalDate first, java.time.LocalDate last) {
+    java.util.Map<java.time.LocalDate, Long> result = new java.util.HashMap<>();
+    jdbc.query(
+        "SELECT visit_day, visits FROM daily_visits WHERE code = ? AND visit_day >= ? AND visit_day <= ?",
+        (org.springframework.jdbc.core.RowCallbackHandler)
+            rs ->
+                result.put(
+                    rs.getObject("visit_day", java.time.LocalDate.class), rs.getLong("visits")),
+        code,
+        first,
+        last);
+    return result;
+  }
 }

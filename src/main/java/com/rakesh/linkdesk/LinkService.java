@@ -63,6 +63,7 @@ public class LinkService {
     Instant now = clock.instant();
     requireActive(link, now);
     repository.record(code, now);
+    repository.recordDay(code, java.time.LocalDate.ofInstant(now, java.time.ZoneOffset.UTC));
     return link.destination();
   }
 
@@ -81,5 +82,26 @@ public class LinkService {
   private void requireActive(Link link, Instant now) {
     if (!link.status(now).equals("active"))
       throw new LinkFailure(410, "This link has expired or has been disabled.");
+  }
+
+  public Stats stats(String code) {
+    get(code);
+    java.time.LocalDate today = java.time.LocalDate.now(clock.withZone(java.time.ZoneOffset.UTC));
+    java.time.LocalDate first = today.minusDays(29);
+    java.util.Map<java.time.LocalDate, Long> stored = repository.days(code, first, today);
+    java.util.List<Day> days =
+        first
+            .datesUntil(today.plusDays(1))
+            .map(day -> new Day(day, stored.getOrDefault(day, 0L)))
+            .toList();
+    return new Stats(code, days);
+  }
+
+  public record Day(java.time.LocalDate date, long visits) {}
+
+  public record Stats(String code, java.util.List<Day> days) {
+    public Stats {
+      days = java.util.List.copyOf(days);
+    }
   }
 }

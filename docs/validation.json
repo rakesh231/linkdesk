@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-13",
+  "tests": {
+    "tests": 29,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "INSTRUCTION": {
+      "covered": 854,
+      "missed": 105
+    },
+    "BRANCH": {
+      "covered": 49,
+      "missed": 15
+    },
+    "LINE": {
+      "covered": 167,
+      "missed": 18
+    },
+    "COMPLEXITY": {
+      "covered": 76,
+      "missed": 20
+    },
+    "METHOD": {
+      "covered": 57,
+      "missed": 7
+    },
+    "CLASS": {
+      "covered": 14,
+      "missed": 0
+    }
+  },
+  "spotbugsFindingsAfterDocumentedExclusions": 0,
+  "localJavaVerified": [
+    "17.0.19",
+    "21.0.11"
+  ],
+  "smoke": "passed",
+  "restartPersistence": "link and 120 aggregate/daily visits preserved",
+  "browser": "create, library, insights, health verified; no warning/error console entries observed"
+}

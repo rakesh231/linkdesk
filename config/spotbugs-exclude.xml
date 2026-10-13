@@ -1,0 +1,5 @@
+<FindBugsFilter>
+  <!-- Singleton collaborators are intentionally shared through constructor injection.
+       This does not suppress mutable data exposed to callers. -->
+  <Match><Class name="~com[.]rakesh[.]linkdesk[.](LinkService|LinkController|LinkRepository)"/><Method name="&lt;init&gt;"/><Bug pattern="EI_EXPOSE_REP2"/></Match>
+</FindBugsFilter>

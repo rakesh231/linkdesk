@@ -84,4 +84,9 @@ public class LinkController {
       String status,
       long visits,
       Instant lastVisitAt) {}
+
+  @GetMapping("/api/links/{code}/stats")
+  public LinkService.Stats stats(@PathVariable String code) {
+    return service.stats(code);
+  }
 }

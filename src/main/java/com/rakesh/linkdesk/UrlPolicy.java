@@ -22,7 +22,9 @@ public final class UrlPolicy {
           || uri.getPort() > 65535
           || uri.getPort() == 0) throw invalid();
       // Never fetch or preview destinations on the server.
-      return uri.toASCIIString();
+      String ascii = uri.toASCIIString();
+      if (ascii.length() > 2048) throw invalid();
+      return ascii;
     } catch (URISyntaxException ex) {
       throw invalid();
     }
